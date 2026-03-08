@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-test
+spec:
+  podSelector:
+    matchLabels:
+      app: test
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: ingress
+  policyTypes:
+    - Ingress
